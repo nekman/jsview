@@ -4,12 +4,12 @@
   "version": "0.1",
 
   "background": {  	
-    "scripts": ["jsview.js"]
+    "scripts": ["src/jsview.js"]
   },
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["jsview-content.js"]
+      "js": ["src/jsview-content.js"]
     }
   ],
 

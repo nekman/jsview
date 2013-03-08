@@ -1,45 +1,47 @@
 (function() {
-        
+
     var executeContentScript = function(tabId) {
-      chrome.tabs.executeScript(tabId, {
-          file: 'jsview-content.js'
+      chrome.contextMenus.removeAll();
+
+      chrome.tabs.get(tabId, function(tab) {
+        if (/^(http|https):\/\//.test(tab.url)) {
+          chrome.tabs.executeScript(tabId, {
+            file: 'src/jsview-content.js'
+          });
+        }
       });
     },
 
     handleOnMessage = function(message, sender, sendResponse) {
-        chrome.contextMenus.removeAll();
+      var urls = JSON.parse(message);
 
-        var urls = JSON.parse(message);
-
-        urls.forEach(function(url) {
-          chrome.contextMenus.create({
-            title: url,
-            id: url
-          });
+      urls.forEach(function(url) {
+        chrome.contextMenus.create({
+          title: url.split('/').pop(),
+          id: url
         });
+      });
     },
 
     handleOnContextMenuClick = function(info, tab) {
-      window.open(info.menuItemId, '_blank');
+      window.open('view-source:' + info.menuItemId, '_blank');
     },
 
-    handleOnTabUpdated = function(tabId, changeInfo, tab) {            
+    handleOnTabUpdated = function(tabId, changeInfo, tab) {
       if (changeInfo.status === 'complete') {
-        setTimeout(function() {
-          executeContentScript(tabId);  
-        }, 100);           
-      }      
+          executeContentScript(tabId);
+      }
     },
 
-    handleOnTabActivated = function(tab, activeInfo) {        
-        executeContentScript(tab.tabId);  
+    handleOnTabActivated = function(tab, activeInfo) {
+      executeContentScript(tab.tabId);
     };
 
-    /* Events */
+    /* Listen to events */
 
     chrome.contextMenus.onClicked.addListener(handleOnContextMenuClick);
     chrome.tabs.onUpdated.addListener(handleOnTabUpdated);
     chrome.tabs.onActivated.addListener(handleOnTabActivated);
-    chrome.extension.onMessage.addListener(handleOnMessage);    
+    chrome.extension.onMessage.addListener(handleOnMessage);
 
 }());
