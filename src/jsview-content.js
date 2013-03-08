@@ -1,6 +1,5 @@
 (function() {
-
-	var toArray = function(nodeList) {
+    var toArray = function(nodeList) {
       return Array.prototype.slice.call(nodeList);
     },
 
@@ -17,6 +16,6 @@
     	return;
     }
 
-	chrome.extension.sendMessage(JSON.stringify(scriptUrls));
+    chrome.extension.sendMessage(JSON.stringify(scriptUrls));
 
 }());
