@@ -1,0 +1,17 @@
+{
+  "name": "JSView",
+  "manifest_version": 2,
+  "version": "0.1",
+
+  "background": {  	
+    "scripts": ["jsview.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["jsview-content.js"]
+    }
+  ],
+
+  "permissions": ["contextMenus", "tabs", "webRequest", "webRequestBlocking", "http://*/*", "https://*/*"]
+}
