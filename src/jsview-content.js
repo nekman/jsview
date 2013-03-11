@@ -4,15 +4,32 @@
     return Array.prototype.slice.call(nodeList);
   },
 
-  scriptUrls = toArray(document.querySelectorAll('script')).map(function(scriptNode) {
+  scriptMapSelector = function(scriptNode) {
     return scriptNode.src;
-  })
-  .filter(function(url) {
-    return url !== '';
-  })
-  .sort();
+  },
 
-  if (!scriptUrls.length) {
+  cssMapSelector = function(linkNode) {
+    return linkNode.href;
+  },
+
+  findNodes = function(selector, mapSelector) {
+    return toArray(document.querySelectorAll(selector))
+      .map(mapSelector)
+      .filter(function(url) {
+        return url !== '';
+      })
+      .sort();
+  },
+
+  scriptUrls = {
+    cssFiles: findNodes('link[rel=stylesheet]', cssMapSelector),
+    jsFiles: findNodes('script', scriptMapSelector),
+    hasAny: function() {
+      return this.cssFiles.length && this.jsFiles.length;
+    }
+  };
+
+  if (!scriptUrls.hasAny()) {
     return;
   }
 
