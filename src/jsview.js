@@ -38,12 +38,11 @@
     },
 
     createMenuSection = function(files, type) {
-      // JS files
       createHeaderItem(type);
       createMenuItems(files);
 
       if (type === TYPE_JS) {
-        // Separator
+        // Add separator
         menus.create({
           parentId: PARENT_ID,
           type: 'separator'
@@ -74,7 +73,7 @@
 
     handleOnTabUpdated = function(tabId, changeInfo, tab) {
       if (changeInfo.status === 'complete') {
-          // Need to wait here, so that the tab activated can complete.
+          // Need to wait here, so that the activated tab can complete.
           // TODO: Fix.
           setTimeout(function() {
             executeContentScript(tabId);
