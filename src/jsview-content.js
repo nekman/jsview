@@ -1,5 +1,7 @@
+/*
+ * TODO: Refactor!
+ */
 (function() {
-
   var toArray = function(nodeList) {
     return Array.prototype.slice.call(nodeList);
   },
@@ -8,7 +10,7 @@
     return scriptNode.src;
   },
 
-  cssMapSelector = function(linkNode) {
+  linkMapSelector = function(linkNode) {
     return linkNode.href;
   },
 
@@ -21,18 +23,34 @@
       .sort();
   },
 
-  scriptUrls = {
-    cssFiles: findNodes('link[rel=stylesheet]', cssMapSelector),
-    jsFiles: findNodes('script', scriptMapSelector),
-    hasAny: function() {
-      return this.cssFiles.length && this.jsFiles.length;
+  queryForScriptAndLinkNodes = function() {
+    return {
+      cssFiles: findNodes('link[rel=stylesheet]', linkMapSelector),
+      jsFiles: findNodes('script', scriptMapSelector),
+      hasAny: function() {
+        return this.cssFiles.length || this.jsFiles.length;
+      }
+    };
+  },
+
+  isLinkOrScriptTag = function(e) {
+    return e.srcElement.nodeName === 'SCRIPT' || e.srcElement.nodeName === 'LINK';
+  },
+
+  sendMessage = function(scriptUrls) {
+    if (!scriptUrls.hasAny()) {
+      return;
     }
+
+    chrome.extension.sendMessage(JSON.stringify(scriptUrls));
   };
 
-  if (!scriptUrls.hasAny()) {
-    return;
-  }
+  document.addEventListener('DOMNodeInserted', function(e) {
+    if (isLinkOrScriptTag(e)) {
+      sendMessage(queryForScriptAndLinkNodes());
+    }
+  }, false);
 
-  chrome.extension.sendMessage(JSON.stringify(scriptUrls));
+  sendMessage(queryForScriptAndLinkNodes());
 
 }());
