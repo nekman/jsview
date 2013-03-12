@@ -10,7 +10,7 @@
       var inFile = fileName + '.svg',
           outFile = [fileName, '-', Math.round(ORG_SCALE*scale), '.png'].join('');
 
-      svg2png(inFile, outFile, scale, function (err) {
+      svg2png(inFile, outFile, scale, function(err) {
         if (err) {
           console.error('Error converting to png:', err);
           return;
