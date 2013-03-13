@@ -17,8 +17,8 @@
   findNodes = function(selector, mapSelector) {
     return toArray(document.querySelectorAll(selector))
       .map(mapSelector)
-      .filter(function(url) {
-        return url !== '';
+      .filter(function(url, pos, self) {
+        return url !== '' && self.indexOf(url) === pos;
       })
       .sort();
   },
@@ -26,10 +26,7 @@
   queryForScriptAndLinkNodes = function() {
     return {
       cssFiles: findNodes('link[rel=stylesheet]', linkMapSelector),
-      jsFiles: findNodes('script', scriptMapSelector),
-      hasAny: function() {
-        return this.cssFiles.length || this.jsFiles.length;
-      }
+      jsFiles: findNodes('script', scriptMapSelector)
     };
   },
 
@@ -38,10 +35,6 @@
   },
 
   sendMessage = function(scriptUrls) {
-    if (!scriptUrls.hasAny()) {
-      return;
-    }
-
     chrome.extension.sendMessage(JSON.stringify(scriptUrls));
   };
 
