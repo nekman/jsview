@@ -5,7 +5,10 @@
   "description": "JSView for Chrome. View JS and CSS files.",
 
   "background": {  	
-    "scripts": ["src/jsview.js"]
+    "scripts": [
+      "src/lib/require.js",
+      "src/require.config.js"
+    ]
   },
 
   "content_scripts": [{
