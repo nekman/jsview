@@ -4,22 +4,24 @@ define(
     'menuHandler'
   ],
 
-  function(tabs, MenuHandler) {
+  function(tabs, menuHandler) {
 
-    var ContentScriptHandler = function() {      
+    var isValidUrl = function(url) {
+      return /^(http|https):\/\//.test(url);
     },
 
-    isValidUrl = function(url) {
-      return /^(http|https):\/\//.test(url);
+    ContentScriptHandler = function() {
     };
 
     ContentScriptHandler.prototype = {
       execute: function(tabId) {
+        menuHandler.clear();
+
         tabs.get(tabId, function(tab) {
           if (!(tab && isValidUrl(tab.url))) {
             return;
           }
-                
+
           tabs.executeScript(tabId, {
             file: 'src/jsview-content.js'
           });
@@ -27,12 +29,11 @@ define(
       },
 
       handleOnMessage: function(message) {
-        var scriptUrls = JSON.parse(message),
-            menuHandler = new MenuHandler(scriptUrls);
+        var scriptUrls = JSON.parse(message);
 
-        menuHandler.render();
+        menuHandler.render(scriptUrls);
       }
     };
 
-    return new ContentScriptHandler();
+    return new ContentScriptHandler;
 });

@@ -10,16 +10,7 @@ define(
         TYPE_JS = 'JS',
         TYPE_CSS = 'CSS',
 
-    MenuHandler = function(scriptUrls) {
-      if (!scriptUrls) {
-        throw 'scriptUrls';
-      }
-
-      this.jsFiles = scriptUrls.jsFiles || [];
-      this.cssFiles = scriptUrls.cssFiles || [];
-
-      this.numberOfJSFiles = this.jsFiles.length;
-      this.numberOfCSSFiles = this.cssFiles.length;      
+    MenuHandler = function() {      
     };
 
     MenuHandler.prototype = {
@@ -72,10 +63,30 @@ define(
       hasAny: function() {
         return this.numberOfJSFiles || this.numberOfCSSFiles;
       },
+      
+      hasBoth: function() {
+        return this.numberOfJSFiles && this.numberOfCSSFiles;
+      },
 
-      render: function() {
+      render: function(scriptUrls) {
         this.clear();
 
+        if (!scriptUrls) {
+          throw 'scriptUrls';
+        }
+
+        this.jsFiles = scriptUrls.jsFiles || [];
+        this.cssFiles = scriptUrls.cssFiles || [];
+
+        this.numberOfJSFiles = this.jsFiles.length;
+        this.numberOfCSSFiles = this.cssFiles.length;
+
+        this.renderInternal();
+        
+        return this;
+      },
+
+      renderInternal: function() {
         if (!this.hasAny()) {
           return;
         }
@@ -83,16 +94,16 @@ define(
         this.addMainMenu();
         this.addMenuFiles(TYPE_JS);        
         
-        if (this.numberOfJSFiles && this.numberOfCSSFiles) {
+        if (this.hasBoth()) {
           this.createMenuItem({ type: 'separator' });
         }
 
         this.addMenuFiles(TYPE_CSS);
 
-        return this;
       }
     };
 
-    return MenuHandler;
+
+    return new MenuHandler;
 
 });
