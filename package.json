@@ -8,7 +8,12 @@
     "url": "git://github.com/nekman/jsview.git"
   },
   "dependencies": {
-    "svg2png": "1.0.0"    
+    "svg2png": "1.0.0",
+    "jasmine-node": "1.4",
+    "requirejs": "2.1.5"
+  },
+  "scripts": {
+    "test": "jasmine-node test --verbose" 
   },
   "engines": {
     "node": "~0.8"
