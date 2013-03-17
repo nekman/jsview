@@ -10,9 +10,10 @@ icons:
 build: icons
 	rm -rf build
 	mkdir -p build
+	mkdir -p build/src
 	mkdir -p build/icons
 	cp -r icons/* build/icons
-	cp -r $(JS_DIR)* build
+	cp -r $(JS_DIR)* build/src
 	cp manifest.json build/manifest.json
 	
 	zip -r build/build.`date +"%y%m%d%H%M%S"`.zip build
