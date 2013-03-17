@@ -18,7 +18,10 @@ define(
         menuHandler.clear();
 
         tabs.get(tabId, function(tab) {
-          if (!(tab && isValidUrl(tab.url))) {
+          if (!tab) {
+            return;
+          }
+          if (!isValidUrl(tab.url)) {
             return;
           }
 
