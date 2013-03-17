@@ -1,3 +1,9 @@
+/**
+ * ReDefine 
+ * 
+ * Utility for CommonJS that re-defines RequireJS define method 
+ * and make it possible to use stub/fake dependencies.
+ */
 (function(fs) {
   
   var ReDefine = function() {    
