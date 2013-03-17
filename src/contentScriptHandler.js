@@ -42,7 +42,6 @@ define(
 
       execute: function(tabId) {
         menuHandler.clear();
-        var self = this;
 
         tabs.get(tabId, this.tabGetCallback.bind(this));
       },
