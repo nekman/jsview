@@ -1,7 +1,7 @@
 {
   "name": "JSView",
   "manifest_version": 2,
-  "version": "1.0",
+  "version": "1.0.1",
   "description": "JSView for Chrome. View JS and CSS files.",
 
   "background": {  	
