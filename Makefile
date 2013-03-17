@@ -1,4 +1,3 @@
-
 JS_DIR = src/
 
 test: 
@@ -6,8 +5,18 @@ test:
 
 #convert svg icon to png.
 icons: 
-	node $(JS_DIR)svg2png.js	
+	node svg2png.js
 
-all: icons test
+build: icons
+	rm -rf build
+	mkdir -p build
+	mkdir -p build/icons
+	cp -r icons/* build/icons
+	cp -r $(JS_DIR)* build
+	cp manifest.json build/manifest.json
+	
+	zip -r build/build.`date +"%y%m%d%H%M%S"`.zip build
 
-.PHONY: icons test
+all: test build
+
+.PHONY: icons test build
