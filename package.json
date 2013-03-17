@@ -9,8 +9,7 @@
   },
   "dependencies": {
     "svg2png": "1.0.0",
-    "jasmine-node": "1.4",
-    "requirejs": "2.1.5"
+    "jasmine-node": "1.4"
   },
   "scripts": {
     "test": "jasmine-node test --verbose" 
