@@ -1,6 +1,12 @@
 JSView
 ======
 
-JSView extension for Google Chrome.<br/><br/>
+[![Build Status](https://travis-ci.org/nekman/jsview.png?branch=master)](https://travis-ci.org/nekman/jsview)
 
-<strong>Work in progress!</strong>
+This is an extension for Google Chrome that displays a web page included JS / CSS files in the context menu.
+
+Inspired by the great 
+<a href="https://addons.mozilla.org/en-us/firefox/addon/jsview/">JSView extension for Mozilla Firefox</a>.
+
+
+
