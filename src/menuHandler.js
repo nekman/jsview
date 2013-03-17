@@ -6,11 +6,11 @@ define(
   function(menus) {
 
     var MENU_TEMPLATE = 'JS ({JS}) CSS ({CSS})',
-        PARENT_ID = 'MAIN',      
+        PARENT_ID = 'MAIN',
         TYPE_JS = 'JS',
         TYPE_CSS = 'CSS',
 
-    MenuHandler = function() {      
+    MenuHandler = function() {
     };
 
     MenuHandler.prototype = {
@@ -30,7 +30,7 @@ define(
         var self = this;
 
         files.forEach(function(url) {
-          self.createMenuItem({            
+          self.createMenuItem({
             title: url.split('/').pop() || url,
             id: url
           });
@@ -38,7 +38,7 @@ define(
       },
 
       addHeaderItem: function(title) {
-        this.createMenuItem({        
+        this.createMenuItem({
           title: title,
           id: title,
           enabled: false
@@ -53,7 +53,7 @@ define(
       addMainMenu: function() {
         var self = this;
         // Create main menu
-        this.createMenuItem({          
+        this.createMenuItem({
           title: MENU_TEMPLATE
                   .replace(/{JS}/, self.numberOfJSFiles)
                   .replace(/{CSS}/, self.numberOfCSSFiles)
@@ -63,7 +63,7 @@ define(
       hasAny: function() {
         return this.numberOfJSFiles || this.numberOfCSSFiles;
       },
-      
+
       hasBoth: function() {
         return this.numberOfJSFiles && this.numberOfCSSFiles;
       },
@@ -82,7 +82,7 @@ define(
         this.numberOfCSSFiles = this.cssFiles.length;
 
         this.renderInternal();
-        
+
         return this;
       },
 
@@ -92,8 +92,8 @@ define(
         }
 
         this.addMainMenu();
-        this.addMenuFiles(TYPE_JS);        
-        
+        this.addMenuFiles(TYPE_JS);
+
         if (this.hasBoth()) {
           this.createMenuItem({ type: 'separator' });
         }
