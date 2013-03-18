@@ -2,7 +2,7 @@
   "author": "Nils Ekman <nisse.ekman@gmail.com> (http://nekman.se)",
   "description": "JSView for Google Chrome",
   "name": "JSView",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": {
     "type": "git",
     "url": "git://github.com/nekman/jsview.git"
