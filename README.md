@@ -8,7 +8,7 @@ By clicking on a file, it opens in a new tab.<br/><br/>
 
 ###Example:
 <br/>
-<img src="https://lh4.googleusercontent.com/pNtRuOcY1c_9wJ1hMc_m9rAoRGMX0GfiZNDoIQV_PH5uavZEBBJiLG5I_xjBt6Xy13dz4OZ7NQ=s640-h400-e365-rw" />
+<img src="https://lh4.googleusercontent.com/eMwkaGqfyA7mOdG3j1ZWB86c2aguCiKUPm3Au3nqiCLbA2O4BcZFLIGIcg9b8u823LHaq04p=s640-h400-e365-rw"/>
 
 Can be installed from the <a href="https://chrome.google.com/webstore/detail/jsview/gbbhhhbdjckoiclnpaodmiehfmpeiefd">Chrome Webstore</a>
 
