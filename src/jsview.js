@@ -16,7 +16,7 @@ define(
     },
 
     handleOnContextMenuClick = function(info, tab) {
-      window.open('view-source:' + info.menuItemId, '_blank');
+      chrome.tabs.create({url: 'view-source:' + info.menuItemId});
     },
 
     handleOnTabActivated = function(tab, activeInfo) {
